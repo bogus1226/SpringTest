@@ -11,6 +11,7 @@ public class Store {
 	private String businessNumber;
 	private String introduce;
 	private Date createdAt;
+	private Date updatedAt;  
 	
 	public int getId() {
 		return id;
@@ -60,5 +61,5 @@ public class Store {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	private Date updatedAt;  
+	
 }

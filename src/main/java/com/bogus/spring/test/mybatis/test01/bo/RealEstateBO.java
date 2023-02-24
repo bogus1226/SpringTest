@@ -33,8 +33,18 @@ public class RealEstateBO {
 	// 3. 복합조건 select
 	public List<RealEstate> getPropertyInformation(int area, int price) {
 		
-		List<RealEstate> realEstate = realEstateDAO.selectPropertyInformation(area, price);
-		
-		return realEstate;
+		return realEstateDAO.selectPropertyInformation(area, price);	 
 	}
+	
+	// 1. 객체로 insert 하기
+	public int addRealEstateByObject(RealEstate realEstate) {
+		
+		return realEstateDAO.insertRealEstateByObject(realEstate);
+	}
+	
+	// 2. field 로 insert 하기
+	public int addRealEstate(int realtorId, String address, int area, String type, int price, int rentPrice) {
+		return realEstateDAO.insertRealEstate(realtorId, address, area, type, price, rentPrice);
+	}
+	
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="/jsp/seller/input">
+		<form method="post" action="/jsp/seller/add">
 			<h2 class="mt-2"><b>판매자 추가</b></h2>
 			
 			<label class="m-0 text-secondary"><b>닉네임</b></label>

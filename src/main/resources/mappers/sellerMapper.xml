@@ -23,5 +23,35 @@
 			, now()
 		)
 	</insert>
+	
+	<select id="selectLastSeller" resultType="com.bogus.spring.test.jsp.test01.model.Seller">
+		SELECT
+			`id`
+			, `nickname`
+			, `temperature`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		ORDER BY
+			`id` DESC
+		LIMIT
+			1		
+	</select>
+	
+	<select id="selectIdSeller" resultType="com.bogus.spring.test.jsp.test01.model.Seller">
+		SELECT
+			`id`
+			, `nickname`
+			, `temperature`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		WHERE
+			id = #{id}
+	</select>
 
 </mapper>

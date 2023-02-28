@@ -40,7 +40,8 @@
 			1		
 	</select>
 	
-	<select id="selectIdSeller" resultType="com.bogus.spring.test.jsp.test01.model.Seller">
+	<select id="selectIdSeller" resultType="com.bogus.spring.test.jsp.test01.model.Seller"
+	parameterType="int">
 		SELECT
 			`id`
 			, `nickname`

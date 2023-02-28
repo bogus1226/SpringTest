@@ -21,7 +21,7 @@ public class SellerController {
 	
 	@PostMapping("/add")
 	@ResponseBody
-	public String addUser(
+	public String addSeller(
 			@RequestParam("nickname") String nickname
 			, @RequestParam("url") String profileImage
 			, @RequestParam("temperature") double temperature) {

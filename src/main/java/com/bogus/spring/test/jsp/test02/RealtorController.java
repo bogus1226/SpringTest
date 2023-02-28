@@ -22,7 +22,6 @@ public class RealtorController {
 	Realtor realtor = new Realtor();
 	
 	@PostMapping("/add")
-	@ResponseBody
 	public String addRealtor(
 			@RequestParam("office") String office
 			, @RequestParam("phoneNumber") String phoneNumber
@@ -30,12 +29,12 @@ public class RealtorController {
 			, @RequestParam("grade") String grade
 			, Model model) {
 		
-		realtorBO.addRealtor(office, phoneNumber, address, grade);
-		
 		realtor.setOffice(office);
 		realtor.setPhoneNumber(phoneNumber);
 		realtor.setAddress(address);
 		realtor.setGrade(grade);
+		
+		realtorBO.addRealtorObject(realtor);
 		
 		model.addAttribute("realtor", realtor);
 		
@@ -47,8 +46,4 @@ public class RealtorController {
 		 return "jsp/inputRealtor";
 	}
 	
-	@GetMapping("/info")
-	public String realtorInfo() {
-		 return "jsp/realtorInfo";
-	}
 }

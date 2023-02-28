@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bogus.spring.test.jsp.test02.dao.RealtorDAO">
 
-	<insert id="insertRealtor" parameterType="map"
+	<insert id="insertRealtorObject" parameterType="com.bogus.spring.test.jsp.test02.model.Realtor"
 	useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 			`realtor`
@@ -24,10 +24,7 @@
 			, #{grade}
 			, now()
 			, now()
-		)
-		
-		
-			
+		)	
 	</insert>
 
 </mapper>

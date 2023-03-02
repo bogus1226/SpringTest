@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="/jsp/realtor/add">
+		<form method="get" action="/jsp/realtor/add">
 			<h2 class="mt-2"><b>공인중개사 추가</b></h2>
 			<label class="m-0"><b>상호명</b></label>
 			<input type="text" class="form-control col-4 mb-1" name="office">

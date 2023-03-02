@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bogus.spring.test.jsp.test02.bo.RealtorBO;
 import com.bogus.spring.test.jsp.test02.model.Realtor;
@@ -21,18 +19,19 @@ public class RealtorController {
 	
 	Realtor realtor = new Realtor();
 	
-	@PostMapping("/add")
+	@GetMapping("/add")
 	public String addRealtor(
-			@RequestParam("office") String office
-			, @RequestParam("phoneNumber") String phoneNumber
-			, @RequestParam("address") String address
-			, @RequestParam("grade") String grade
+//			@RequestParam("office") String office
+//			, @RequestParam("phoneNumber") String phoneNumber
+//			, @RequestParam("address") String address
+//			, @RequestParam("grade") String grade
+			@ModelAttribute Realtor realtor
 			, Model model) {
 		
-		realtor.setOffice(office);
-		realtor.setPhoneNumber(phoneNumber);
-		realtor.setAddress(address);
-		realtor.setGrade(grade);
+//		realtor.setOffice(office);
+//		realtor.setPhoneNumber(phoneNumber);
+//		realtor.setAddress(address);
+//		realtor.setGrade(grade);
 		
 		realtorBO.addRealtorObject(realtor);
 		

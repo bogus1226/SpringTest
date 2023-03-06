@@ -30,7 +30,7 @@
 						<td>${cardBill.store}</td>
 						<td><fmt:formatNumber value="${cardBill.pay}" type="currency"/></td>
 						<fmt:parseDate value="${cardBill.date}" pattern="yyyy-MM-dd" var="date"/>
-						<td><fmt:formatDate value="${date}" pattern="yyyy년 MM월 dd일"/></td>
+						<td><fmt:formatDate value="${date}" pattern="yyyy년 M월 dd일"/></td>
 						<td>${cardBill.installment}</td>
 					</tr>	
 				</c:forEach>

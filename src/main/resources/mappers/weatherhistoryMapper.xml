@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bogus.spring.test.jstl.dao.WeatherhistoryDAO">
+
+	<!-- weatherhistory 테이블에서 날짜기준 오름차순으로 selectWeatherhistoryList에 저장하게 만들었습니다! -->
+	<select id="selectWeatherhistoryList" resultType="com.bogus.spring.test.jstl.model.Weatherhistory">
+		SELECT
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+			, `createdAt`
+			, `updatedAt`  
+		FROM
+			`weatherhistory`
+		ORDER BY
+			`date`
+	</select>
+	
+	<!-- weatherhistory 테이블 insert를 위해 만들었습니다 파라미터 타입은 DAO에 있어서 map으로 하였습니다! -->
+	<insert id="insertWeatherhistory" parameterType="map">
+		INSERT INTO
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `temperatures`
+			, `precipitation`
+			, `microDust`
+			, `windSpeed`
+			, `createdAt`
+			, `updatedAt`  
+		)
+		VALUE
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+			, now()
+			, now() 
+		)
+	</insert>
+
+</mapper>

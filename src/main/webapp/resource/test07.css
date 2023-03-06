@@ -5,12 +5,13 @@
 	margin:auto;
 }
 
-.main-contents {
-	height:600px;
-}
-
 .main-contents > .main-menu {
 	width:200px;
+	background-color:#699de0;
+}
+
+.main-menu > .menu-logo {
+	height:50px;
 }
 
 .main-contents > .main-content {
@@ -18,5 +19,10 @@
 }
 
 footer {
-	height:130px;
+	height:80px;
 }
+
+footer > .logo {
+	width:200px;
+}
+

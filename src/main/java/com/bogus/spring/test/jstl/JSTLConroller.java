@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bogus.spring.test.jstl.bo.WeatherhistoryBO;
 import com.bogus.spring.test.jstl.model.Member;
+import com.bogus.spring.test.jstl.model.Weatherhistory;
 
 @Controller
 @RequestMapping("/jstl")
@@ -182,14 +186,48 @@ public class JSTLConroller {
 		return "jstl/test06";
 	}
 	
+	// ↓ 여기서부터 JSTL 종합문제 1 입니다!
+	
+	@Autowired
+	private WeatherhistoryBO weatherhistoryBO;
+	
+	// 날씨 화면
 	@GetMapping("/test07")
-	public String test07() {
+	public String test07(Model model) {
+		
+		List<Weatherhistory> weatherhistoryList = weatherhistoryBO.getWeatherhistory();
+		
+		model.addAttribute("weatherhistoryList", weatherhistoryList);
+		
 		return "jstl/test07";
 	}
 	
+	// 날씨 insert 후 날씨화면으로 redirect  
+	@GetMapping("/add")
+	public String addWeatherhistory(
+			@RequestParam("date") String date
+			, @RequestParam("weather") String weather
+			, @RequestParam("microDust") String microDust
+			, @RequestParam("temperatures") double temperatures
+			, @RequestParam("precipitation") double precipitation
+			, @RequestParam("windSpeed") double windSpeed) {
+		weatherhistoryBO.addWeatherhistory(date, weather, microDust, temperatures, precipitation, windSpeed);
+		
+		return "redirect:/jstl/test07";
+	}
+	
+	// 날씨 입력 화면
 	@GetMapping("/test08")
 	public String test08() {
+	
+		return "jstl/test08";
+	}
+	
+	
+	@GetMapping("/test09")
+	public String test09() {
 		
 		return "jstl/store/listPage";
 	}
+	
 }

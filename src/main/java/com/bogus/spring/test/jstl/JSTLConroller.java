@@ -186,4 +186,10 @@ public class JSTLConroller {
 	public String test07() {
 		return "jstl/test07";
 	}
+	
+	@GetMapping("/test08")
+	public String test08() {
+		
+		return "jstl/store/listPage";
+	}
 }

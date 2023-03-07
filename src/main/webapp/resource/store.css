@@ -9,10 +9,27 @@ header {
 	height:90px;
 }
 
-.main-contents {
-	height:500px;
-}
 
 footer {
 	height:120px;
+}
+
+.storeInfo {
+	height:120px;
+	border-radius: 10px;
+}
+
+.menu {
+	border-radius: 5px;
+	background-color:lightgray;
+}
+
+
+.main-contents > a {
+	text-decoration: none;
+	color:black;
+}
+
+.main-contents > a:hover {
+	color:gray;
 }

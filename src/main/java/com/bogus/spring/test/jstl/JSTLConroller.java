@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bogus.spring.test.jstl.bo.StoreListBO;
 import com.bogus.spring.test.jstl.bo.WeatherhistoryBO;
 import com.bogus.spring.test.jstl.model.Member;
+import com.bogus.spring.test.jstl.model.Review;
+import com.bogus.spring.test.jstl.model.StoreList;
 import com.bogus.spring.test.jstl.model.Weatherhistory;
 
 @Controller
@@ -223,11 +226,28 @@ public class JSTLConroller {
 		return "jstl/test08";
 	}
 	
+	// ↓ 여기서부터 JSTL 종합문제 2 입니다!
+	@Autowired
+	private StoreListBO storeBO;
 	
 	@GetMapping("/test09")
-	public String test09() {
+	public String test09(Model model) {
+		
+		List<StoreList> storeList = storeBO.getStoreList();
+		
+		model.addAttribute("storeList", storeList);
 		
 		return "jstl/store/listPage";
+	}
+	
+	@GetMapping("/test10")
+	public String test10(@RequestParam("id") int id, Model model) {
+		
+		List<Review> reviewList = storeBO.getStoreReview(id);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		return "jstl/store/review";
 	}
 	
 }

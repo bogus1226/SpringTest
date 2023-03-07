@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,15 +14,22 @@
 </head>
 <body>
 	<div id="wrap">
-		<header class="bg-info d-flex align-items-center">
-			<h2 class="text-white ml-4"><b>배탈의 민족</b></h2>
-		</header>
-		<section class="main-contents bg-danger"></section>
-		<footer>
-			<hr>
-			<h4><b>(주)우와한형제</b></h4>
-			<div class="text-secondary small"><b>고객센터 : 1500-1500</b></div>
-		</footer>
+		<%@ include file="header.jsp" %>
+		<section class="main-contents">
+			<h2 class="mt-3 mb-3"><b>우리동네 가게</b></h2>
+			<c:forEach var="store" items="${storeList}">
+				<a href="http://localhost:8080/jstl/test10?id=${store.id}" target="_blank">
+					<div class="storeInfo border border-info mb-2">
+						<div class="mt-3 ml-3">
+							<h4><b>${store.name}</b></h4>
+							<div><b>전화번호: ${store.phoneNumber}</b></div>
+							<div><b>주소: ${store.address}</b></div>
+						</div>
+					</div>
+				</a>
+			</c:forEach>
+		</section>
+		<%@ include file="footer.jsp" %>
 	</div>
 
 </body>

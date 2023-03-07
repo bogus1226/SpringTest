@@ -244,8 +244,10 @@ public class JSTLConroller {
 	public String test10(@RequestParam("id") int id, Model model) {
 		
 		List<Review> reviewList = storeBO.getStoreReview(id);
+		List<StoreList> storeName = storeBO.getStoreName(id);
 		
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("storeName", storeName);
 		
 		return "jstl/store/review";
 	}

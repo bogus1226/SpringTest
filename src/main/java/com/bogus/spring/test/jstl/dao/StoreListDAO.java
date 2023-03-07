@@ -14,4 +14,6 @@ public interface StoreListDAO {
 	public List<StoreList> selectStore();
 	
 	public List<Review> selctStoreReview(@Param("id") int id);
+	
+	public List<StoreList> selectStoreName(@Param("id") int id);
 }

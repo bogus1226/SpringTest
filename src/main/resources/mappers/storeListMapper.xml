@@ -35,4 +35,20 @@
 		ORDER BY
 			`id`
 	</select>
+	
+	<select id="selectStoreName" resultType="map" parameterType="int">
+		SELECT
+			`id`
+			, `name`
+			, `phoneNumber`
+			, `address`
+			, `businessNumber`
+			, `introduce`
+			, `createdAt`
+			, `updatedAt`  
+		FROM
+			`store`
+		WHERE
+			`id` = #{id}
+	</select>
 </mapper>

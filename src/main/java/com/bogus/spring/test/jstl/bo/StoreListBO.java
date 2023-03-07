@@ -22,4 +22,8 @@ public class StoreListBO {
 	public List<Review> getStoreReview(int id) {
 		return storeDAO.selctStoreReview(id);
 	}
+	
+	public List<StoreList> getStoreName(int id) {
+		return storeDAO.selectStoreName(id);
+	}
 }

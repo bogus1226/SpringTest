@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,22 +17,55 @@
 	<div id="wrap">
 		<%@ include file="header.jsp" %>
 		<section class="main-contents">
-			<h2 class="mt-3 mb-3"><b>우리동네 가게</b></h2>
-			<c:forEach var="review" items="${reviewList}">
-				<div class="storeInfo border border-info mb-2">
-					<div class="mt-3 ml-3">
-						<div class="d-flex">
-							<div><b>${review.userName}</b></div>
-							<div class="ml-2">${review.point}</div>
-						</div> 
-						<div class="small text-secondary"><b>${review.createdAt}</b></div>
-						<div class="mt-1"><b>${review.review}</b></div>
-						<div>
-							<label class="menu border small text-center"><b>${review.menu}</b></label>
-						</div>	
-					</div>
-				</div>
+			<c:forEach var="storeNameInfo" items="${storeName}">
+				<h2 class="mt-3 mb-2"><b>${storeNameInfo.name} - 리뷰</b></h2>
 			</c:forEach>
+			<c:choose>
+				<c:when test="${!empty reviewList}">
+					<c:forEach var="review" items="${reviewList}">
+						<div class="storeInfo border border-info mb-2">
+							<div class="mt-2 ml-3">
+								<div class="d-flex align-items-center">
+									<div class="mt-1"><b>${review.userName}</b></div>
+									<div class="ml-2 d-flex">
+										<c:set var="countStarFill" value="${review.point / 1}"/>
+										<c:set var="countStarHalf" value="${review.point % 1}"/>
+										<c:set var="countStarEmpty" value="${(5 - (countStarFill + countStarHalf)) / 1}"/>
+										<c:forEach var="i" begin="1" end="${countStarFill}" step="1">
+											<img width="15" alt="가득찬 별그림" src="/img/star_fill.png">
+										</c:forEach>
+										<c:if test="${countStarHalf eq 0.5}">
+											<c:forEach var="i" begin="1" end="1" step="1">
+												<img width="15" alt="반만찬 별그림" src="/img/star_half.png">
+											</c:forEach>
+										</c:if>
+										<c:if test="${countStarEmpty >= 1}">
+											<c:forEach var="i" begin="1" end="${countStarEmpty}" step="1">
+												<img width="15" alt="빈 별그림" src="/img/star_empty.png">
+											</c:forEach>
+										</c:if>
+									</div>
+								</div> 
+								<div class="small text-secondary"><b><fmt:formatDate value="${review.createdAt}" pattern="yyyy년 M월 d일"/></b></div>
+								<c:choose>
+									<c:when test="${empty review.review}">
+										<div class="mt-1 mb-1 text-secondary small"><b>리뷰 내용이 없습니다.</b></div>
+									</c:when>		
+									<c:otherwise>
+										<div class="mt-1 mb-1 small"><b>${review.review}</b></div>
+									</c:otherwise>
+								</c:choose>
+								<div>
+									<label class="menu border small text-center"><b>${review.menu}</b></label>
+								</div>	
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<h5 class="text-secondary text-center"><b>작성된 리뷰가 없습니다.</b></h5>
+				</c:otherwise>
+			</c:choose>
 		</section>
 		<%@ include file="footer.jsp" %>
 	</div>

@@ -16,9 +16,9 @@
 	<div id="wrap">
 		<%@ include file="header.jsp" %>
 		<section class="main-contents">
-			<h2 class="mt-3 mb-3"><b>우리동네 가게</b></h2>
+			<h2 class="mt-3 mb-2"><b>우리동네 가게</b></h2>
 			<c:forEach var="store" items="${storeList}">
-				<a href="http://localhost:8080/jstl/test10?id=${store.id}" target="_blank">
+				<a href="http://localhost:8080/jstl/test10?id=${store.id}">
 					<div class="storeInfo border border-info mb-2">
 						<div class="mt-3 ml-3">
 							<h4><b>${store.name}</b></h4>

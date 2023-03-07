@@ -9,6 +9,15 @@ header {
 	height:90px;
 }
 
+.logo > a{
+	text-decoration: none;
+	color:white;
+}
+
+.logo > a:hover {
+	color:#bceff5;
+}
+
 
 footer {
 	height:120px;
@@ -33,3 +42,4 @@ footer {
 .main-contents > a:hover {
 	color:gray;
 }
+

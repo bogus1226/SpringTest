@@ -21,4 +21,14 @@ public class FavoriteBO {
 	public int addFavorite(String name, String url) {
 		return favoriteDAO.insertFavorite(name, url);
 	}
+	
+	public boolean isDuplicateEmail(String url) {
+		int count = favoriteDAO.selectCountEmail(url);
+		
+		if(count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

@@ -15,7 +15,7 @@
 	
 	<div class="container">
 		<h2><b>즐겨 찾기 목록</b></h2>
-		<table class="table">
+		<table class="table text-center">
 			<thead>
 				<tr>
 					<th>No.</th>

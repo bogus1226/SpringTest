@@ -33,14 +33,19 @@ public class FavoriteController {
 		return "ajax/favorite/list";
 	}
 	
+	// 사이트 이름과 주소를 전달 받고, 데이터를 저장
+	// 성공 실패 여부를 response로 전달한다.
+	// 데이터의 형태는 일반적으로 json
 	@PostMapping("/add")
-	@ResponseBody
+	@ResponseBody // json 활용을위해 ResponseBody 적용
 	public Map<String, String> addFavorite(
 			@RequestParam("name") String name
 			, @RequestParam("url") String url) {
 		
 		int count = favoriteBO.addFavorite(name, url);
 		
+		// 성공 : {"result": "success"}
+		// 실패 : {"result": "fail"}
 		Map<String, String> resultMap = new HashMap<>();
 		if(count == 1) {
 			resultMap.put("result", "success");
@@ -55,5 +60,19 @@ public class FavoriteController {
 	public String inputFavorite() {
 		
 		return "ajax/favorite/input";
+	}
+	
+	@GetMapping("/is_duplicate")
+	@ResponseBody
+	public Map<String, Boolean> is_duplicateUrl(@RequestParam("url") String url) {
+		
+		Map<String, Boolean> resultMap = new HashMap<>();
+		if(favoriteBO.isDuplicateEmail(url)) {
+			resultMap.put("is_duplicate", true);
+		} else {
+			resultMap.put("is_duplicate", false);
+		}
+		
+		return resultMap;
 	}
 }

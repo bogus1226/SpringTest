@@ -32,4 +32,14 @@
 			, now()
 		)
 	</insert>
+	
+	<select id="selectCountEmail" parameterType="string" resultType="int">
+		SELECT
+			count(1)
+		FROM
+		 	`book_mark`
+		 WHERE
+		 	`url` = #{url}
+	</select>
+	
 </mapper>

@@ -16,4 +16,5 @@ public interface FavoriteDAO {
 			@Param("name") String name
 			, @Param("url") String url);
 
+	public int selectCountEmail(@Param("url") String url);
 }

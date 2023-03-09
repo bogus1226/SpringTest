@@ -21,14 +21,17 @@
 			<input type="text" class="form-control" id="urlInput"> 
 			<button type="button" class="btn btn-info ml-3" id="duplicateBtn">중복확인</button>	
 		</div>
-		<div class="hidden text-danger small mt-1">중복된 url 입니다</div>
+		<div class="warningBox hidden text-danger small mt-1">중복된 url 입니다</div>
 		<button type="button" class="btn btn-success btn-block mt-3" id="addBtn" >추가</button>
 	</div>
 	
 	<script>
 		$(document).ready(function(){
+			var clickCount = 0;
+			
 			$("#duplicateBtn").on("click",function(){
 				let url = $("#urlInput").val();
+				clickCount = 1;
 				
 				if(url == "") {
 					alert("주소를 입력하세요!!");
@@ -47,9 +50,10 @@
 					, success:function(data) {
 						if(data.is_duplicate) {
 							alert("중복된 주소입니다");
-							$(".hidden").attr(visibility, visible);
+							$(".warningBox").removeClass("hidden");
 						} else {
 							alert("사용 가능한 주소입니다")
+							$(".warningBox").addClass("hidden");
 						}
 					}
 					, error:function() {
@@ -72,12 +76,17 @@
 					return;
 				} 
 				
-				if (!url.startsWith("http://") && !url.startsWith("https://")) {
+				if(!url.startsWith("http://") && !url.startsWith("https://")) {
 					alert("주소를 확인하세요!!");
 					return;	
 				} 
 				
-				// /ajax/favorite/add?name=네이버&url=https://naver.com (type, url, data 로 주소 형식을 반드는것이다!)
+				if(clickCount == 0 || $(".warningBox").hasClass("hidden") == false) {
+					alert("중복확인 해주세요!!");
+					return;
+				}
+				
+				// /ajax/favorite/add?name=네이버&url=https://naver.com (type, url, data 로 주소 형식을 반드는것이다)
 				$.ajax({
 					type:"post"
 					, url:"/ajax/favorite/add"

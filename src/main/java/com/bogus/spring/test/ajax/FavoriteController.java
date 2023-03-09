@@ -72,6 +72,21 @@ public class FavoriteController {
 		} else {
 			resultMap.put("is_duplicate", false);
 		}
+			
+		return resultMap;
+	}
+	
+	@GetMapping("/delete")
+	@ResponseBody
+	public Map<String, String> deleteFavorite(@RequestParam("id") int id) {
+		
+		Map<String, String> resultMap = new HashMap<>();
+		int count = favoriteBO.deleteFavorite(id);
+		if(count == 1) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "false");
+		}
 		
 		return resultMap;
 	}

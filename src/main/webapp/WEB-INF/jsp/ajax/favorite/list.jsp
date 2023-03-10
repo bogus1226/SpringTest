@@ -31,7 +31,7 @@
 						<td>${status.count}</td>
 						<td>${favorite.name}</td>
 						<td>${favorite.url}</td>
-						<td><button type="button" class="btn btn-danger btn-sm" id="deleteBtn" value="${favorite.id}">삭제</button></td>
+						<td><button type="button" class="delete-btn btn btn-danger btn-sm" data-id="${favorite.id}">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -41,16 +41,15 @@
 	<script>
 		$(document).ready(function(){
 			
-			$("#deleteBtn").on("click", function(){
-				let id = $("#deleteBtn").val(); 
-				alert(id);
+			$(".delete-btn").on("click", function(){
+				let id = $(this).data("id"); 
 				$.ajax({
 					type:"get"
 					, url:"/ajax/favorite/delete"
 					, data:{"id":id}
 					, success:function(data) {
 						if(data.result == "success") {
-							location.href = "/ajax/favorite/list";
+							location.reload(); // 페이지 새로고침
 						} else {
 							alert("삭제 실패");
 						}

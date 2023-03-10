@@ -40,10 +40,10 @@ public class FavoriteController {
 	@ResponseBody // json 활용을위해 ResponseBody 적용
 	public Map<String, String> addFavorite(
 			@RequestParam("name") String name
-			, @RequestParam("url") String url) {
+			, @RequestParam("url") String url
+			, Model model) {
 		
 		int count = favoriteBO.addFavorite(name, url);
-		
 		// 성공 : {"result": "success"}
 		// 실패 : {"result": "fail"}
 		Map<String, String> resultMap = new HashMap<>();
@@ -62,16 +62,19 @@ public class FavoriteController {
 		return "ajax/favorite/input";
 	}
 	
-	@GetMapping("/is_duplicate")
+	@PostMapping("/is_duplicate")
 	@ResponseBody
 	public Map<String, Boolean> is_duplicateUrl(@RequestParam("url") String url) {
 		
 		Map<String, Boolean> resultMap = new HashMap<>();
-		if(favoriteBO.isDuplicateEmail(url)) {
-			resultMap.put("is_duplicate", true);
-		} else {
-			resultMap.put("is_duplicate", false);
-		}
+		
+//		if(favoriteBO.isDuplicateEmail(url)) {
+//			resultMap.put("is_duplicate", true);
+//		} else {
+//			resultMap.put("is_duplicate", false);
+//		}
+		
+		resultMap.put("is_duplicate", favoriteBO.isDuplicateEmail(url));
 			
 		return resultMap;
 	}
@@ -85,7 +88,7 @@ public class FavoriteController {
 		if(count == 1) {
 			resultMap.put("result", "success");
 		} else {
-			resultMap.put("result", "false");
+			resultMap.put("result", "fail");
 		}
 		
 		return resultMap;

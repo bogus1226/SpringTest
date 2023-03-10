@@ -25,11 +25,13 @@ public class FavoriteBO {
 	public boolean isDuplicateEmail(String url) {
 		int count = favoriteDAO.selectCountEmail(url);
 		
-		if(count == 0) {
-			return false;
-		} else {
-			return true;
-		}
+//		if(count == 0) {
+//			return false;
+//		} else {
+//			return true;
+//		}
+		
+		return count != 0;
 	}
 	
 	public int deleteFavorite(int id) {

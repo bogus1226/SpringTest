@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+#wrap {
+    width: 1200px;
+    margin: auto;
+}
+
+header {
+    height: 100px;
+    font-size: 40px;
+}
+
+.main-menu {
+    height: 50px;
+}
+
+.image {
+    height: 400px;
+}
+
+.main-contents > .test1 {
+    width: 380px;
+    height: 270px;
+}
+
+.main-contents > .contents {
+    width: 440px;
+    height: 270px;
+}
+
+.main-contents > .text2 {
+    width: 380px;
+    height: 270px;
+}
+
+footer {
+    height: 100px;
+}
+
+.bg-color {
+    background-color: rgb(170, 100, 49);
+}
+
+.bg-color2 {
+    background-color: rgb(233, 122, 43);
+}
+
+.text-color {
+    color: #ffffff;
+}
+
+
+

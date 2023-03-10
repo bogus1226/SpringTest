@@ -8,7 +8,6 @@
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="/resource/favorite.css" type="text/css">	
 <title>즐겨 찾기 추가하기</title>
 </head>
 <body>
@@ -21,13 +20,22 @@
 			<input type="text" class="form-control" id="urlInput"> 
 			<button type="button" class="btn btn-info ml-3" id="duplicateBtn">중복확인</button>	
 		</div>
-		<div class="warningBox hidden text-danger small mt-1">중복된 url 입니다</div>
+		<div class="text-danger small mt-1 d-none" id="duplaicateText">중복된 url 입니다</div>
+		<div class="small text-info mt-1 d-none" id="availableText">저장 가능한 url 입니다</div>
 		<button type="button" class="btn btn-success btn-block mt-3" id="addBtn" >추가</button>
 	</div>
 	
 	<script>
 		$(document).ready(function(){
-			var clickCount = 0;
+			var isCkecked = false;
+			var isDuplicate = true;
+			
+			$("#urlInput").keyup(function(){
+				isCkecked = false;
+				isDuplicate = true;
+				$("#duplaicateText").addClass("d-none");
+				$("#availableText").addClass("d-none");
+			});
 			
 			$("#duplicateBtn").on("click",function(){
 				let url = $("#urlInput").val();
@@ -44,16 +52,26 @@
 				} 
 				
 				$.ajax({
-					type:"get"
+					type:"post"
 					, url:"/ajax/favorite/is_duplicate"
 					, data:{"url":url}
 					, success:function(data) {
+						
+						// 중복 체크 여부 저장
+						isCkecked = true;
+						
 						if(data.is_duplicate) {
 							alert("중복된 주소입니다");
-							$(".warningBox").removeClass("hidden");
+							$("#duplaicateText").removeClass("d-none");
+							$("#availableText").addClass("d-none");
+							
+							isDuplicate = true;
 						} else {
 							alert("사용 가능한 주소입니다")
-							$(".warningBox").addClass("hidden");
+							$("#availableText").removeClass("d-none");
+							$("#duplaicateText").addClass("d-none");
+							
+							isDuplicate = false;
 						}
 					}
 					, error:function() {
@@ -81,8 +99,14 @@
 					return;	
 				} 
 				
-				if(clickCount == 0 || $(".warningBox").hasClass("hidden") == false) {
-					alert("중복확인 해주세요!!");
+				if(!isCkecked) {
+					alert("중복체크를 진행해주세요!!");
+					return;
+				}
+				
+				// 중복된 url인 경우
+				if(isDuplicate) {
+					alert("중복된 url 입니다!!");
 					return;
 				}
 				

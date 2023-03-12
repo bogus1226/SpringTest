@@ -7,7 +7,6 @@
 
 header {
     height: 100px;
-    font-size: 40px;
 }
 
 .main-menu {
@@ -49,5 +48,16 @@ footer {
     color: #ffffff;
 }
 
+.nav-item > a:hover {
+	color:#ffffff;
+}
 
+.reservation {
+	width: 500px;
+    margin: auto;
+}
+
+::placeholder {
+	font-size: small;
+}
 

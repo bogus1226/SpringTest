@@ -26,8 +26,4 @@ public interface BookingDAO {
 	public Booking selectSearchBookingList(
 			@Param("name") String name
 			, @Param("phoneNumber") String phoneNumber);
-	
-	public int selectCountSearchBookingList(
-			@Param("name") String name
-			, @Param("phoneNumber") String phoneNumber);
 }

@@ -46,13 +46,4 @@ public class BookingBO {
 	}
 	
 	
-	public boolean getCountSearchBookingList(
-			String name,
-			String phoneNumber) {
-		
-		int count = bookingDAO.selectCountSearchBookingList(name, phoneNumber);
-		
-		return count != 0;
-	}
-	
 }

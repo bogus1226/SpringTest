@@ -75,16 +75,6 @@
 			`phoneNumber` = #{phoneNumber}
 	</select>
 	
-	<select id="selectCountSearchBookingList" parameterType="String" resultType="int">
-		SELECT
-			count(1)
-		FROM
-			`booking`	
-		WHERE
-			`name` = #{name}
-		AND
-			`phoneNumber` = #{phoneNumber}
-	</select>
 
 </mapper>
 

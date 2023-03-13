@@ -75,19 +75,6 @@ public class BookingController {
 		return resultMap;	
 	}
 	
-	@GetMapping("/searchCountList")
-	@ResponseBody
-	public Map<String, Boolean> searchCountBookingList(
-			@RequestParam("name") String name
-			, @RequestParam("phoneNumber") String phoneNumber) {
-		
-		Map<String, Boolean> resultMap = new HashMap<>();
-		
-		resultMap.put("result", bookingBO.getCountSearchBookingList(name, phoneNumber));
-		
-		return resultMap;
-	}
-	
 	@GetMapping("/searchList")
 	@ResponseBody
 	public Map<String, Object> searchBookingList(

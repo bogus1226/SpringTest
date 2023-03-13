@@ -116,14 +116,14 @@
 			
 			$.ajax({
 				type:"get"
-				, url:"/booking/searchCountList"
+				, url:"/booking/searchList"
 				, data:{
 					"name":name
 					, "phoneNumber":phoneNumber}
 				, success:function(data) {
-					if(data.result) {
+					if(data.result == "success") {
 						alert("1인당 한번 예약 가능합니다.\n이미예약하였습니다.");
-					} else {
+					}else {
 						$.ajax({
 							type:"get"
 							, url:"/booking/add"

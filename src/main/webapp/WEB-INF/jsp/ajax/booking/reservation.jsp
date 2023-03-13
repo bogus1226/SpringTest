@@ -93,6 +93,11 @@
 				return;
 			}
 			
+			/*if(isNan(day)) {
+				alert("숙박일수는 숫자만 입력 가능합니다.");
+				return;
+			}*/
+			
 			if(headcount == "") {
 				alert("숙박인원을 입력하세요");
 				return;

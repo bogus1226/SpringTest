@@ -117,39 +117,34 @@
             
             $.ajax({
 				type:"get"
-				, url:"/booking/searchCountList"
+				, url:"/booking/searchList"
 				, data:{"name":name, "phoneNumber":phoneNumber}
-				, success:function(data) {
-					if(data.result) {
-						$.ajax({
-							type:"get"
-							, url:"/booking/searchList"
-							, data:{"name":name, "phoneNumber":phoneNumber}
-							, success:function(data){
-								let name = data.name;
-								let date = data.date;
-								let day = data.day;
-								let headcount = data.headcount;
-								let state = data.state;
-								
-								alert("이름 : " + name + "\n" + 
-										"날짜 : " + date + "\n" +
-										"일수 : " + day + "\n" +
-										"인원 : " + headcount + "\n" +
-										"상태 : " + state)
-							}
-							, error:function(){
-								alert("조회성공 후 조회 리스트 전달 실패");
-							}
-						})
-					} else {
+				, success:function(data){
+					
+				if(data.result == "success") {
+
+					let name = data.booking.name;
+					let date = data.booking.date.substring(0,10);
+					let day = data.booking.day;
+					let headcount = data.booking.headcount;
+					let state = data.booking.state;
+					
+					alert("이름 : " + name + "\n" + 
+							"날짜 : " + date + "\n" +
+							"일수 : " + day + "\n" +
+							"인원 : " + headcount + "\n" +
+							"상태 : " + state);
+					}else {
 						alert("조회 결과가 없습니다");
 					}
 				}
-				, error:function() {
+				, error:function(){
 					alert("조회 에러");
 				}
 			});
+						
+					
+			
 			
 		});
                     

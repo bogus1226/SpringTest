@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,16 +64,13 @@ public class BookingController {
 			@RequestParam("name") String name
 			, @RequestParam("headcount") int headcount
 			, @RequestParam("day") int day
-			, @RequestParam("date") String date
+			, @DateTimeFormat(pattern="yy년 MM월 d일") 
+				@RequestParam("date") Date date
 			, @RequestParam("phoneNumber") String phoneNumber) throws ParseException {
 		
 		Map<String, Boolean> resultMap = new HashMap<>();
 		
-		SimpleDateFormat formmater = new SimpleDateFormat("yy년 MM월 d일");
-		
-		Date date2 = formmater.parse(date);
-		
-		resultMap.put("result", bookingBO.addBooking(name, headcount, day, date2, phoneNumber));
+		resultMap.put("result", bookingBO.addBooking(name, headcount, day, date, phoneNumber));
 		
 		return resultMap;	
 	}
@@ -97,20 +95,15 @@ public class BookingController {
 			, @RequestParam("phoneNumber") String phoneNumber) {
 		
 		Booking searchBookingList = bookingBO.getSeachBookingList(name, phoneNumber);
+		Map<String, Object> result = new HashMap<>();
+		if(bookingBO.getCountSearchBookingList(name, phoneNumber)) {
+			result.put("result", "success");
+			result.put("booking", searchBookingList);
+		} else{
+			result.put("result", "false");
+		} 
 		
-		Date date = searchBookingList.getDate();
-		SimpleDateFormat formmater = new SimpleDateFormat("yyyy-MM-dd");
-		String date2 = formmater.format(date);
-		
-		
-		Map<String, Object> ListMap = new HashMap<>();
-		ListMap.put("name", searchBookingList.getName());
-		ListMap.put("date", date2);
-		ListMap.put("day", searchBookingList.getDay());
-		ListMap.put("headcount", searchBookingList.getHeadcount());
-		ListMap.put("state", searchBookingList.getState());
-		
-		return ListMap;
+		return result;
 	}
 	
 }

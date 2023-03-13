@@ -33,7 +33,7 @@ public class BookingBO {
 			, Date date
 			, String phoneNumber) {
 		
-		int count = bookingDAO.insertBooking(name, headcount, day, date, phoneNumber);
+		int count = bookingDAO.insertBooking(name, headcount, day, date, phoneNumber, "대기중");
 		
 		return count != 0;
 	}

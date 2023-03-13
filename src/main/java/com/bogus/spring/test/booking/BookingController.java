@@ -96,7 +96,7 @@ public class BookingController {
 		
 		Booking searchBookingList = bookingBO.getSeachBookingList(name, phoneNumber);
 		Map<String, Object> result = new HashMap<>();
-		if(bookingBO.getCountSearchBookingList(name, phoneNumber)) {
+		if(searchBookingList != null) {
 			result.put("result", "success");
 			result.put("booking", searchBookingList);
 		} else{

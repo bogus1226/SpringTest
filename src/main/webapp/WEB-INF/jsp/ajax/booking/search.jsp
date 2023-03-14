@@ -96,23 +96,19 @@
 	     	let name = $("#name").val();
 	     	let phoneNumber = $("#phonenumber").val();
      	   
-           	if($("#name").val() == "") {
+           	if(name == "") {
                 alert("이름을 입력하세요.");
                 return;
             }
-            if($("#phonenumber").val() == "") {
+            if(phoneNumber == "") {
                 alert("전화번호를 입력하세요.");
                 return;
-            } else if($("#phonenumber").val() != "") {
+            } else if(phoneNumber != "") {
                 let regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-                if(!regExp.test($("#phonenumber").val())){
+                if(!regExp.test(phoneNumber)){
                     alert("전화번호를 정확히 입력하여 주십시오.");
                     return;
                 }
-            }
-            if($("#date").val() == "") {
-                alert("날짜를 선택하세요.");
-                return;
             }
             
             $.ajax({
@@ -120,22 +116,21 @@
 				, url:"/booking/searchList"
 				, data:{"name":name, "phoneNumber":phoneNumber}
 				, success:function(data){
-					
-				if(data.result == "success") {
-
-					let name = data.booking.name;
-					let date = data.booking.date.substring(0,10);
-					let day = data.booking.day;
-					let headcount = data.booking.headcount;
-					let state = data.booking.state;
-					
-					alert("이름 : " + name + "\n" + 
-							"날짜 : " + date + "\n" +
-							"일수 : " + day + "\n" +
-							"인원 : " + headcount + "\n" +
-							"상태 : " + state);
-					}else {
-						alert("조회 결과가 없습니다");
+					if(data.result == "success") {
+	
+						let name = data.booking.name;
+						let date = data.booking.date.substring(0,10);
+						let day = data.booking.day;
+						let headcount = data.booking.headcount;
+						let state = data.booking.state;
+						
+						alert("이름 : " + name + "\n" + 
+								"날짜 : " + date + "\n" +
+								"일수 : " + day + "\n" +
+								"인원 : " + headcount + "\n" +
+								"상태 : " + state);
+					} else {
+							alert("조회 결과가 없습니다");
 					}
 				}
 				, error:function(){
